@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Curiozidades</title>
+    <LINK REL="stylesheet" HREF="css/bootstrap.css" />
+    <STYLE>
+        .center-txt {
+            text-align: center;
+            color: black;
+            width: 90px;
+            padding: 4px;
+            margin: 0;
+            border: 0;
+        }
+
+        .button-selected {
+            background-color: #343a40;
+            color: white;
+            border-radius: 15px;
+        }
+
+        .width-button-bar {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 0;
+            margin-left: 0;
+
+        }
+
+        .bottom-button-bar {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            width: 100%;
+        }
+
+        .icon-font {
+            font-size: 40px;
+        }
+
+        article {
+            margin-top: 20px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+        }
+
+        main {
+            padding-top: 80px;
+            padding-bottom: 120px;
+        }
+
+        form {
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+    </STYLE>
+    <SCRIPT>
+        function createNewsCards(nData) {
+            console.log(nData);
+            var a = document.createElement("ARTICLE"); // Create a <ARTICLE> element
+            a.setAttribute("class", "card");
+
+            var nImg = document.createElement("IMG"); // Create a <H2> element
+
+            var h2 = document.createElement("H2"); // Create a <H2> element
+            h2.setAttribute("class", "card-header");
+            nImg.src = nData.img; // Create a text node
+            nImg.style.width = '100%'; //The full width is 400px, 10px of border left and right
+            h2.innerText = nData.message; // Create a text node
+             a.appendChild(nImg);
+            a.appendChild(h2); // Append the text to 
+
+            document.getElementById("tela").appendChild(a);
+
+        } //createNewsCards
+
+        //Busca os dados da API (Serviço REST/JSON - AJAX)
+        function reloadPage() {
+            var message = "";
+            var img = "";
+            var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+
+            fetch("https://uselessfacts.jsph.pl/random.json?language=en", requestOptions)
+                .then(response => response.text())
+                .then(result => message = JSON.parse(result))
+                .catch(error => console.log('error', error));
+
+
+            var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+
+            fetch("https://api.giphy.com/v1/gifs/random?apiKey=0UTRbFtkMxAplrohufYco5IY74U8hOes") //WEB API -  HTTP
+                .then(request => request.text()) //Retorna o objeto request
+                .then(data => img = JSON.parse(data).data.image_original_url);
+            var obj = {};
+            sleep(3000).then(function () {
+                obj = {
+                    "message": message.text,
+                    "img": img
+                }
+                createNewsCards(obj);
+                console.log(obj);
+            });
+
+
+        } //reloadPage
+
+        function sleep(ms) {
+            return (new Promise(function (resolve, reject) {
+                setTimeout(function () { resolve(); }, ms);
+            }));
+        }
+
+    </SCRIPT>
+</HEAD>
+
+<BODY onload="reloadPage();" lang="pt-br">
+    <!-- Navegador superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+
+        <a class="navbar-brand" href="#">&#x1F981;</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Inicio</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Aqui é onde ocorrem os paranauês -->
+    <main class="container" id="tela">
+    </main>
+
+    <!-- Navegador inferior -->
+    <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
+        <div class="row w-100 bottom-button-bar">
+            
+        </div>
+    </nav>
+</BODY>
+<!-- carga de scripts do Bootstrap, JQuery, Popper -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+    integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+
+</HTML>
