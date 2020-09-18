@@ -41,9 +41,15 @@
             font-size: 40px;
         }
 
+        h3 {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
         article {
             margin-top: 20px;
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+            min-width: 400px;
+            max-height: 450px;
         }
 
         main {
@@ -65,12 +71,12 @@
 
             var nImg = document.createElement("IMG"); // Create a <H2> element
 
-            var h2 = document.createElement("H2"); // Create a <H2> element
+            var h2 = document.createElement("H3"); // Create a <H2> element
             h2.setAttribute("class", "card-header");
             nImg.src = nData.img; // Create a text node
             nImg.style.width = '100%'; //The full width is 400px, 10px of border left and right
             h2.innerText = nData.message; // Create a text node
-             a.appendChild(nImg);
+            a.appendChild(nImg);
             a.appendChild(h2); // Append the text to 
 
             document.getElementById("tela").appendChild(a);
@@ -130,13 +136,22 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        
 
-        <a class="navbar-brand" href="#">&#x1F981;</a>
+
+        <a class="navbar-brand" href="#">&#x1F602;</a>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="navbar-nav float-right text-right pr-3">
-                <a class="nav-item nav-link" href="index.html">Inicio</a>
+                <a class="nav-item nav-link" href="index.html">Useless Curiosities</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Feature 2</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Feature 3</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Feature 4</a>
             </div>
         </div>
     </nav>
@@ -148,7 +163,7 @@
     <!-- Navegador inferior -->
     <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
         <div class="row w-100 bottom-button-bar">
-            
+
         </div>
     </nav>
 </BODY>
