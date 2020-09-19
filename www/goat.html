@@ -15,32 +15,6 @@
             border: 0;
         }
 
-        .button-selected {
-            background-color: #343a40;
-            color: white;
-            border-radius: 15px;
-        }
-
-        .width-button-bar {
-            text-align: center;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            margin-right: 0;
-            margin-left: 0;
-
-        }
-
-        .bottom-button-bar {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            width: 100%;
-        }
-
-        .icon-font {
-            font-size: 40px;
-        }
-
         h3 {
             font-family: "Comic Sans MS", cursive, sans-serif;
         }
@@ -61,6 +35,31 @@
             padding: 0;
             border: 0;
             margin: 0;
+        }
+
+        button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #347bb4;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        button:hover {
+            background-color: #3e758e
+        }
+
+        button:active {
+            background-color: #3e758e;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
         }
     </STYLE>
     <SCRIPT>
@@ -108,14 +107,25 @@
                 .then(data => img = JSON.parse(data).data.image_original_url);
             var obj = {};
             sleep(3000).then(function () {
+
                 obj = {
                     "message": message.text,
                     "img": img
                 }
                 createNewsCards(obj);
                 console.log(obj);
+                document.getElementById("loader").remove();
             });
 
+            var a = document.createElement("DIV");
+            a.setAttribute("class", "loader");
+            a.setAttribute("id", "loader");
+            a.style.textAlign = 'center';
+            var nImg = document.createElement("IMG");
+            nImg.src = "img/loading.gif";
+            nImg.style.width = '35%';
+            a.appendChild(nImg);
+            document.getElementById("tela").appendChild(a);
 
         } //reloadPage
 
@@ -128,21 +138,18 @@
     </SCRIPT>
 </HEAD>
 
-<BODY onload="reloadPage();" lang="pt-br">
+<BODY lang="en-us">
     <!-- Navegador superior -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-
-
         <a class="navbar-brand" href="#">&#x1F602;</a>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="navbar-nav float-right text-right pr-3">
-                <a class="nav-item nav-link" href="index.html">Useless Curiosities</a>
+                <a class="nav-item nav-link" href="goat.html">Useless Curiosities</a>
             </div>
             <div class="navbar-nav float-right text-right pr-3">
                 <a class="nav-item nav-link" href="pokemon.html">Pokemons Initials </a>
@@ -158,6 +165,10 @@
 
     <!-- Aqui é onde ocorrem os paranauês -->
     <main class="container" id="tela">
+        <button type="button" onclick="reloadPage();" style="width: 100%;">
+            <span> Get a new curiosity</span>
+        </button>
+
     </main>
 
     <!-- Navegador inferior -->
