@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- A biblioteca bundle já contem os arquivos JS do Bootstrap, Popper, e jQuery.
+    <script src="js/bootstrap.bundle.js"></script>-->    
+    <title>Random Jokes</title>
+    <link rel="icon" href="img/joke.png">
+    <link REL="stylesheet" HREF="css/bootstrap.css" />
+    <STYLE>
+        .center-txt {
+                text-align: center;
+                color: black;
+                width: 90px;
+                padding: 4px;
+                margin: 0;
+                border: 0;
+            }
+            
+
+            .button-selected {
+                background-color: #343a40;
+                color: white;
+                border-radius: 15px;
+            }
+
+            .width-button-bar {
+                text-align: center;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-right: 0;
+                margin-left: 0;
+
+            }
+
+            .bottom-button-bar {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                width: 100%;
+            }
+
+            .icon-font {
+                font-size: 40px;
+            }
+
+            h3 {
+                font-family: "Comic Sans MS", cursive, sans-serif;
+                text-align: center;
+            }
+
+            p{
+                text-align: center;
+            }
+
+            #botao{ 
+                text-align: center 
+            }           
+
+            .btn {
+                border: 2px solid black;
+                background-color: white;
+                color: black;
+                padding: 14px 28px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;                
+            }
+
+            .success {
+                border-color: #4CAF50;
+                color: green;
+                }
+
+            .success:hover {
+                background-color: #4CAF50;
+                color: white;
+                }
+
+            article {
+                margin-top: 20px;
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
+                min-width: 400px;
+                max-height: 450px;
+            }
+
+            main {
+                padding-top: 80px;
+                padding-bottom: 120px;
+            }
+
+            form {
+                padding: 0;
+                border: 0;
+                margin: 0;
+            }
+    </STYLE>
+    <SCRIPT>
+        function createJokes() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    document.getElementById("piada").innerText = null;
+                    document.getElementById("resposta").innerText = null;
+
+                    apiMessage = JSON.parse(this.responseText);
+                    document.getElementById("piada").innerText = apiMessage['setup'];
+                    
+                    
+                    setTimeout(() => {
+                        document.getElementById("resposta").innerText = apiMessage['punchline'];
+                    }, 3000);
+                    
+                    
+                    console.log("Piada: " + apiMessage['setup']);
+                    console.log("Resposta: " + apiMessage['punchline']);
+                    
+                }
+            };
+            xhttp.open("GET", "https://official-joke-api.appspot.com/random_joke", true);
+            xhttp.send();
+        }
+        
+    </SCRIPT>
+</HEAD>
+
+<BODY lang="en-us">
+
+    <!-- Navegador superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">&#127183;</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="goat.html">Useless Curiosities</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="pokemon.html">Pokemons Initials </a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="piadas.html">Random Jokes</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Feature 4</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <hr>        
+        <article class="card-header">
+            <br>
+            <div id="botao">
+                <button class="btn success" onclick="createJokes();">Tell me a joke</button>
+            </div>
+            <br>
+            <br>
+            <h3 id="piada"></h3>
+            <br>
+            <p id="resposta"></p>
+            <br>            
+        </article>
+        <hr>
+    </main>
+
+    <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
+        <div class="row w-100 bottom-button-bar">
+        </div>
+    </nav>
+</BODY>
+
+</HTML>
