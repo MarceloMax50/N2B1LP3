@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes</title>
+
+    <link REL="stylesheet" HREF="css/bootstrap.css" />
+
+    <style>
+        main {
+            padding-top: 80px;
+            padding-bottom: 120px;
+        }
+    </style>
+
+    <script>
+        function createArticle(nData) {
+            for (index in nData) {
+                var card = document.createElement("div");
+                card.setAttribute("class", "card mb-3");
+
+                var cardBody = document.createElement("div");
+                cardBody.setAttribute("class", "card-body");
+
+                var title = document.createElement("h5");
+                title.setAttribute("class", "card-title");
+                title.innerText = nData[index].title;
+
+                var releaseDate = document.createElement("h6");
+                releaseDate.setAttribute("class", "card-subtitle mb-2 text-muted");
+                releaseDate.innerText = "Release date: " + nData[index].release_date;
+
+                var director = document.createElement("h6");
+                director.setAttribute("class", "card-subtitle mb-2 text-muted");
+                director.innerText = "Director: " + nData[index].director;
+
+                var producer = document.createElement("h6");
+                producer.setAttribute("class", "card-subtitle mb-2 text-muted");
+                producer.innerText = "Producer: " + nData[index].producer;
+
+                var description = document.createElement("p");
+                description.setAttribute("class", "card-text");
+                description.innerText = nData[index].description;
+
+                card.appendChild(cardBody);
+                cardBody.appendChild(title);
+                cardBody.appendChild(releaseDate);
+                cardBody.appendChild(director);
+                cardBody.appendChild(producer);
+                cardBody.appendChild(description);
+
+                document.getElementById("main").appendChild(card);
+            }
+        }
+
+        var apiUrl = "https://ghibliapi.herokuapp.com/films";
+        var myHeaders = new Headers();
+
+        var myInit = {
+            method: 'GET',
+            headers: myHeaders,
+            mode: 'cors',
+            cache: 'default'
+        };
+
+        fetch(apiUrl, myInit)
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (responseText) {
+                var jsonResponse = JSON.parse(responseText);
+                createArticle(jsonResponse);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    </script>
+</head>
+
+<body>
+    <!-- Navegador superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">&#x1F602;</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="goat.html">Useless Curiosities</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="pokemon.html">Pokemons Initials </a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="piadas.html">Random Jokes</a>
+            </div>
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="movies.html">List Of Movies</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main id="main"></main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
